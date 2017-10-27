@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Hello "  + ViewBag.curUserName;
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+<div>
+    @{
+        if(@ViewBag.errors != null){
+            foreach(var error in @ViewBag.errors){
+                
+                <p>@error</p>
+                
+            }
+        }
+    }
+
+<a href="logout">Logout</a>
+<br>
+<br>
+<br>
+<form action="newidea" method="post">
+    <input type="text" name="description" placeholder="Post something witty here...">
+    <input type="submit" name="submit" value="Idea!">
+</form>
+<br>
+<br>
+<br>
+@{
+    foreach(var idea in @ViewBag.allideas){
+        <p><a href="/userprofile/@idea.User.userid">@idea.User.name</a> says:  @idea.description</p>
+        <p><a href="/like/@idea.ideaid">@ViewBag.likes.Count Likes</a>  ||    <a href="/likestatus/@idea.ideaid"> people like this.</a></p>
+           
+    }
+        
+}
+
+
